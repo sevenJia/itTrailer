@@ -4,7 +4,7 @@
   "description": "电影预告网站",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server/index.js",
+    "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/sevenJia/itTrailer#readme",
   "dependencies": {
-    "koa": "^2.7.0"
+    "koa": "^2.7.0",
+    "koa-views": "^6.2.0",
+    "pug": "^2.0.4",
+    "puppeteer": "^1.18.0"
   }
 }
