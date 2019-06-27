@@ -4,7 +4,7 @@ const  accessAsync = function(dir, status = fs.constants.F_OKstatus){//官方不
     return new Promise((resolve)=>{
         fs.access(dir, status, (err) => {
             resolve(`${err ? 0:1}`) 
-        });     
+        });
     })
 }
 const  mkdirAsync = function(dir){
@@ -12,7 +12,7 @@ const  mkdirAsync = function(dir){
         fs.mkdir(dir, {recursive: true}, (err) => {//recursive: true 无论路径存不存在 都会创建
             if(err) return reject(err)
             resolve('创建成功')
-        });     
+        });
     })
 }
 //创建目录
