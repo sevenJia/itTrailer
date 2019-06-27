@@ -25,14 +25,8 @@ const url = 'https://movie.douban.com/tag/#/';
             items.each((index, item)=>{
                 let it = $(item);
                 let id = it.find('.cover-wp').data('id');
-                let title = it.find('.title').text();
-                let rate = it.find('.rate').text();
-                let img = it.find('img').attr('src').replace('s_ratio','l_ratio');
                 links.push({
                     id,
-                    title,
-                    rate,
-                    img,
                 });
             })
         }

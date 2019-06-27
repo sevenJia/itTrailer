@@ -1,6 +1,7 @@
-
-
 const rp = require('request-promise-native')
+const path = require('path')
+const { mkdir } = require('../../include/commonfun.js')
+
 
 async function fetchMovie(item)
 {
@@ -9,27 +10,33 @@ async function fetchMovie(item)
     const res = await rp(url);
     return res;
 }
-
 (async () => {
-    let movies = [{
-        id: 30175306,
-        title: '追龙Ⅱ',
-        rate: '5.7',
-        img: 'https://img3.doubanio.com/view/photo/l_ratio_poster/public/p2558294190.jpg'
-      },
+
+    const movieDatas = [];
+    let movies = [
       {
         id: 27060077,
-        title: '绿皮书',
-        rate: '8.9',
-        img: 'https://img3.doubanio.com/view/photo/l_ratio_poster/public/p2549177902.jpg'
-      },]
-      movies.map(async movie =>{
-          let movieData = await fetchMovie(movie)
-          try{
-            movieData = JSON.parse(movieData);
-          }catch(err){
-            console.log(err)
-          }
-          console.log(movieData)
-      })
+      }]
+    movies.map(async movie =>{
+        let movieData = await fetchMovie(movie)
+        try{
+          movieData = JSON.parse(movieData);
+          movieDatas.push({
+            rating: movieData.rating,
+            images: movieData.images.large.replace('s_ratio','l_ratio'),
+            title: movieData.title,
+            medium: movieData.trailers[0]['medium'],
+            resource_url: movieData.trailers[0]['resource_url'],
+          })
+        }catch(err){
+          console.log(err)
+        }
+        console.log({
+          rating: movieData.rating,
+          images: movieData.images.large.replace('s_ratio','l_ratio'),
+          title: movieData.title,
+          medium: movieData.trailers[0]['medium'],
+          resource_url: movieData.trailers[0]['resource_url'],
+        })
+    })
 })()
