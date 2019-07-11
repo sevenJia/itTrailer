@@ -12,11 +12,7 @@ async function fetchMovie(item)
     return res;
 }
 let movieDatas = [];
-(async () => {
-    let movies = [
-      {
-        id: 27060077,
-      }]
+let saveMovieFile = async (movies) => {
     movies.forEach(async movie =>{
         let movieData = await fetchMovie(movie)
         try{
@@ -30,14 +26,17 @@ let movieDatas = [];
           })
           let url_path = url.parse(movieData.images.large.replace('s_ratio','l_ratio'))
           let file_path = path.parse(url_path.path)
-          console.log(path.resolve(__dirname, '../../static' + file_path.dir))
-          mkdir(path.resolve(__dirname, '../../static' + file_path.dir))
-          console.log(movieData.images.large.replace('s_ratio','l_ratio'))
-          console.log(url_path.path)
-          
+          //创建文件夹
+          await mkdir(path.resolve(__dirname, '../../static' + file_path.dir))
+          //写入文件
           await rp(movieData.images.large.replace('s_ratio','l_ratio')).pipe(fs.createWriteStream(path.resolve(__dirname, '../../static' +url_path.path)))
+          //写入数据库操作
+          
         }catch(err){
           console.log(err)
         }
     })
-})()
+}
+module.exports = {
+  saveMovieFile
+}

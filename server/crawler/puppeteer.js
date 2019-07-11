@@ -12,7 +12,7 @@ const url = 'https://movie.douban.com/tag/#/';
         waitUntil: 'networkidle2'
     });
     await page.waitForSelector('.more');
-    for(let i = 0;i < 2;i++)
+    for(let i = 0;i < 5;i++)
     {
         await page.click('.more');
     }
