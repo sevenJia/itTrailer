@@ -19,6 +19,8 @@ const {resolve} = require('path');
 
     child.on('message', data => {
         let result = data.result;
-        saveMovieFile(result)
+	console.log(result)
+	saveMovieFile([ { id: 26931786 }])
+        //saveMovieFile(result)
     });
 })();
