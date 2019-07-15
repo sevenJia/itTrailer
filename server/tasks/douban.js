@@ -4,6 +4,7 @@ const { mkdir } = require('../../include/commonfun.js')
 const url = require('url')
 const fs = require('fs')
 const {douban_api_filter} = require('../../config/config.js')
+const {mongo} = require('../../model/mongo.js')
 
 async function fetchMovie(item)
 {
@@ -39,7 +40,9 @@ let saveMovieFile = async (movies) => {
 				//写入文件
 				await rp(image).pipe(fs.createWriteStream(image_save_path))
 				//写入数据库操作
-				console.log(movieDatas)
+				let dbs = new mongo('itTrailer','movie')
+				dbs.save(movieDatas) 
+				//console.log(movieDatas)
 			}
         }catch(err){
           console.log(err)
