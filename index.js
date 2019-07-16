@@ -9,8 +9,8 @@ app.use(views(__dirname + '/views', {
 app.use(async (ctx, next) =>
 {
     await ctx.render('index.pug', {
-        you:'Ace',
-        me:'seven Ja',
+        you:'欢迎来到',
+        me:'v1.2',
     });
 });
 
