@@ -1,9 +1,10 @@
-const Koa = require('koa');
-const app = new Koa();
+const {mongo} = require('../model/mongo.js')
 
-app.use(async (ctx, next) =>
+console.log(mongo)
+let dbs = new mongo('itTrailer','movie')
+console.log(dbs)
+dbs.findOne({id:26100958},function(err,result) 
 {
-    ctx.body = 'hello world';
-});
-
-app.listen(3001);
+    if(err) return console.error(err)
+    console.log(`数据查找成功: ${result}`)
+})

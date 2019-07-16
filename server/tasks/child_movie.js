@@ -1,5 +1,6 @@
 //引入子进程模块
 const cp = require('child_process');
+const {saveMovieFile} = require('./douban')
 const {resolve} = require('path');
 (async ()=>{
     const script = resolve(__dirname, '../crawler/puppeteer.js');
@@ -18,6 +19,8 @@ const {resolve} = require('path');
 
     child.on('message', data => {
         let result = data.result;
-        console.log(result);
+        // console.log(result)
+        // saveMovieFile([ { id: 26931786 }])
+        saveMovieFile(result)
     });
 })();
