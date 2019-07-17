@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<meta charset = "utf-8">
+<title>test</title>
+<style>
+  #change{
+	display:block;
+	width:50%;
+	height:28px;
+	padding-left:3px;
+	margin:20% auto 0 auto;
+  }
+  #box{
+	position:fixed;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+  }
+  .show{
+	width:50%;
+	font-size:14px;
+	cursor:pointer;
+	margin:0 auto;
+	margin-top:15px;
+  }
+  #show{
+	background-color: orange;
+	color:#fff;
+	padding:5px 0 5px 5px;
+  }
+</style>
+<body>
+    <div id = 'box'>
+		<input type="text"  id = 'change'>
+		<div class = "show">输入加密 点击加密字符串解密（支持字母或数字 例如KLT0815170810680008333 字符未做限制检查会出错）</div>
+		<div class = "show" id = "show"></div>		
+	</div>	
+<script>
+	
+	
+	var getEl = document.getElementById('change');
+	var show = document.getElementById('show');
+	var flag = false;
+	getEl.onchange = function(){
+		let showText = encryption(getEl.value, true);
+		show.innerHTML = showText;
+		flag = true;
+	}
+	show.onclick = function()
+	{
+		if(flag){
+			let showText = show.innerHTML;
+			showText = encryption(showText);
+			show.innerHTML = showText;
+		}
+		flag = false;
+	}
+	
+	
+	
+	//加密解密调用
+	function encryption(str,enctype)
+	{
+		//应判断是含有违禁边界字符~! 或diff接近值
+		if(str.length > 0)
+		{
+			let codeAt = 0,
+				charAt = '';
+			let diff = enctype === true ? -1:1;
+			if(enctype === true) str = decimal(str,true);
+			for(let val of str)
+			{
+				codeAt = val.charCodeAt() + diff;
+				charAt += String.fromCharCode(codeAt);
+			}
+			if(!enctype) charAt = decimal(charAt);
+			return charAt;
+		}else{
+			console.log('String lenght is 0');
+		}
+	}
+	//进制转换函数
+	function decimal(str,enctype)
+	{
+		if(enctype === true){
+			//正则分割字符串 字母数字分开
+			var reg = /([a-z])|(\d{1,16})/gim;
+			var deci_10 = str.match(reg);
+			var backStr = '';
+			//数字转为16进制
+			if(deci_10){ 
+				for(let val of deci_10)
+				{
+					backStr += !Number(val) === true ?  val : '~'+Number(val).toString(32)+'!'; 
+				}
+			}
+			return backStr;
+		}else{
+			var reg = /(~\w+!)/igm;
+			//获取十六进制值 Array
+			var getNum = dsymbol(str.match(reg) != null ? str.match(reg): []);
+			if(typeof getNum === 'object')
+			{
+				for(let i = 0; i < getNum.length; i++)
+				{//将数字转为十进制
+					str = str.replace(getNum[i],parseInt(getNum[i],32));
+				}
+			}
+			return str.replace(/~/g,'').replace(/!/g,'');
+		}
+	}
+	//去除匹配边界字符
+	function dsymbol(arr)
+	{
+		if(typeof arr === 'object')
+		{
+			for(let i = 0; i < arr.length; i++)
+			{
+				arr[i] = arr[i].replace('~','').replace('!','');
+			}
+		}
+		return arr;
+	}
+	//获取字符串 将字符串数字部分16进制（前后加标标识符 用于解密取值）再转为ASCII码 -1 进行加密
+	//关键点 进制函数parseInt toSting (parseInt精度问题 在正则匹配时取最长16位长度为一组)
+	//ASCII 函数charCodeAt fromCharCode
+	//正则匹配 match
+	
+
+</script>
+</body>
+</html>
