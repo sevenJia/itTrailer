@@ -41,7 +41,11 @@ let saveMovieFile = async (movies) => {
 				await rp(image).pipe(fs.createWriteStream(image_save_path))
 				//写入数据库操作
 				let dbs = new mongo('itTrailer','movie')
-				dbs.save(movieDatas) 
+				dbs.save(movieDatas,(err,result) => 
+				{
+					if(err) return console.error(err)
+					console.log(`数据插入成功: ${result}`)
+				}) 
 				//console.log(movieDatas)
 			}
         }catch(err){

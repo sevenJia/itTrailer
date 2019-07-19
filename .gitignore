@@ -34,7 +34,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
+*.swp
 # e2e
 /e2e/*.js
 /e2e/*.map

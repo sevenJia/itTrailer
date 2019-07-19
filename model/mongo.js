@@ -26,33 +26,39 @@ class mongo
 		if(field){
 			return new this.model(field)
 		}else{//注意...................................查询等方法 绑定在model上
+			//可以直接从实例取得model 调用对应查询方法 从这里看实际无需封装以下方法（下面返回this可以实现连调）
 			return this.model
 		}
 	}
-	//保存数据
-	save (field)
-	{
-		console.log(this.getModel())
-		console.log(this.getModel(field))
-		this.getModel(field).save(function(err,result) 
-		{
-			if(err) return console.error(err)
-			console.log(`数据插入成功: ${result}`)
-		})
-	}
+	
 	/**
-	 * 删除数据
-	 * remove
-	 * where type Object
+	 * callback函数返回示例 参数需要是错误参数 
+	 * function(err,result)  
+	 * {
+	 * 	if(err) return console.error(err)
+	 * 	console.log(`数据查找成功: ${result}`) 
+	 * }
+	 */
+	
+	 /**
+	 * 保存数据 
+	 * @param {Object|被存入字段} field 
+	 * @param {Function|返回错误、获取数据集} callback 
+	 */
+	save (field, callback)
+	{
+		this.getModel(field).save(callback)
+		return this
+	}
+	 /**
+	 * 移除数据 
+	 * @param {Object|查找条件} where 
+	 * @param {Function|返回错误、获取数据集} callback 
 	 */
 	remove(where,callback)
 	{
 		this.getModel().remove(where,callback)
-		// function(err,result) callback
-		// {
-		// 	if(err) return console.error(err)
-		// 	console.log(`数据查找成功: ${result}`)
-		// }
+		return this
 	}
 	/***
 	 * 查找数据
@@ -63,13 +69,15 @@ class mongo
 	 * findById, findOne, 和 where 这些静态方法。
 	 * Tank.find({ size: 'small' }).where('createdDate').gt(oneYearAgo).exec(callback);
 	 */
-	find(where,callback)
+	find(where,callback,query='')
 	{
-		return this.getModel().find(where).exec(callback)
+		this.getModel().find(where,query,callback)
+		return this
 	}
 	findOne(where,callback)
 	{
-		return this.getModel().findOne(where).exec(callback)
+		this.getModel().findOne(where).query(query).exec(callback)
+		return this
 	}
 	/**
 	 * 更新数据
@@ -79,9 +87,9 @@ class mongo
 	update(where,field,callback)
 	{
 		this.getModel().update(where, { $set: field},callback)
+		return this
 	}
 
 }
-//let dbs = new mongo();
 
 exports.mongo = mongo
