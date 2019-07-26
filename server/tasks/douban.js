@@ -1,6 +1,6 @@
 const rp = require('request-promise-native')
 const path = require('path')
-const { mkdir } = require('../../include/commonfun.js')
+const { mkdir } = require('../commonfun.js')
 const url = require('url')
 const fs = require('fs')
 const {douban_api_filter} = require('../../config/config.js')

@@ -1,6 +1,6 @@
 extends ./layouts/default.pug
 block title
-    title #{data[0]['title']} koa电影预告
+    title #{me} koa电影预告
 block content
     .container-fluid
         .sidebar
@@ -24,22 +24,4 @@ block content
                             p.card-desc 电影描述
                         div.card-footer
                             small.text-muted 1天前更新
-            .row
-                .col-md-6
-                    .card
-                        img.card-img-top(src="https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1445839744.11.jpg",
-                        data-video='https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm ')
-                        div.card-body
-                            h4.card-title 电音标题
-                            p.card-desc 电影描述
-                        div.card-footer
-                            small.text-muted 1天前更新
-                .col-md-6
-                    .card
-                        img.card-img-top(src="https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1445839744.11.jpg",
-                        data-video='https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm ')
-                        div.card-body
-                            h4.card-title 电音标题
-                            p.card-desc 电影描述
-                        div.card-footer
-                            small.text-muted 1天前更新      
+            
