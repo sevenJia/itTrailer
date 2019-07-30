@@ -1,0 +1,21 @@
+extends ./layouts/default.pug
+block title
+    title  koa电影预告项目
+block content
+    .container
+        .content
+            .row
+                - for (var x = 0; x < data.length; x++)
+                    console.log(1)
+                    .col-md-3
+                        .card
+                            div.card_img_box
+                                img.card-img-top(src= 'lazy.jpg',
+                                data-src = `${data[x]['image_save_path']}`,
+                                data-video='https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm ')
+                            div.card-body
+                                h4.card-title #{data[x]['title']}
+                                p.card-desc #{data[x]['summary']}
+                            div.card-footer
+                                small.text-muted 更新于 #{data[x]['pubdate']}
+                        div.bottom_margin

@@ -1,0 +1,17 @@
+.card{}
+.card_img_box{
+    overflow: hidden;
+}
+.card_img_box > img.card-img-top{
+    height:100%;
+}
+.card-desc{
+    font-size: 13px;
+    height: 36px;
+    overflow: hidden;
+    margin-bottom: 0 !important;
+    text-overflow: ellipsis;
+}
+div.bottom_margin {
+    margin-bottom: 15px;
+}

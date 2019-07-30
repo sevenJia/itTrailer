@@ -69,12 +69,18 @@ class mongo
 	 * findById, findOne, 和 where 这些静态方法。
 	 * Tank.find({ size: 'small' }).where('createdDate').gt(oneYearAgo).exec(callback);
 	 */
-	find(where,callback,query='')
+	find(where,query='')
 	{
-		this.getModel().find(where,query,callback)
-		return this
+		//this.getModel().find(where,query,callback)
+		//return this
+		return new Promise((resolve, reject) => {
+			this.getModel().find(where, query,(err,result) => {
+				if(err) return reject(err)
+				resolve(result)
+			})
+		})
 	}
-	findOne(where,callback)
+	findOne(where,callback, query = '')
 	{
 		this.getModel().findOne(where).query(query).exec(callback)
 		return this

@@ -1,23 +1,25 @@
 const {Schema} = require('mongoose')
 const movie = new Schema({	
+    'id': String,
+    'title': String,
+    'year': String,
     'rating': Schema.Types.Mixed,
     'reviews_count': Number,
+    'countries': Array,
+    'summary':String,
+    'images':Schema.Types.Mixed,
+    'trailers': [Schema.Types.Mixed],
+    'image_save_path': String,
     'original_title': String,
     'blooper_urls': Array,
-    'images':Schema.Types.Mixed,
-    'year': String,
     'alt': String,
-    'id': String,
     'pubdate': String,
-    'title': String,
     'writers':[Schema.Types.Mixed],
     'pubdates': Array,
-    'website': String,
     'durations': Array,
-    'trailers': [Schema.Types.Mixed],
     'trailer_urls': Array,
     'bloopers':[Schema.Types.Mixed],
-    'countries': Array,
+    'website': String,
     'popular_reviews': [Schema.Types.Mixed]
 })
 
