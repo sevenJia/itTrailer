@@ -13,38 +13,27 @@ const saticPath = './static'
 app.use(Static(
     path.join(__dirname,saticPath)
 ))
-
+//注册pug目录
 app.use(views(__dirname + '/static/views', {
     extension: 'pug',
 }))
-
-router
-.get('/',async (ctx,next)=>{
+//路由
+router.get('/',async (ctx,next)=>{
     try{
         const  data = await home.getHome()
         await ctx.render('index.pug', {data})
     }catch(e){
         console.log(e)
     }
-})
-.get('/backoffice',async (ctx,next)=>{
+}).get('/backoffice',async (ctx,next)=>{
     await ctx.render('backoffice.pug', {
         me:'backoffice',
     })
 })
 
-// app.use(async (ctx, next) =>
-// {
-//     await ctx.render('index.pug', {
-//         you:'欢迎来到',
-//         me:'v1.2',
-//     })
-// })
 app
     .use(router.routes())
     .use(router.allowedMethods())
-// app
-//     .use(backoffice.routes())
-//     .use(backoffice.allowedMethods())
+
 app.listen(6789)
 console.log('已连接到 localhost:6789')

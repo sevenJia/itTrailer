@@ -33,6 +33,16 @@ const  mkdirAsync = function(dir){
         });
     })
 }
+const sleep = function (time){
+    return new Promise((resolve,reject) => 
+    {
+        setTimeout(()=>
+        {
+            console.log(`sleep ${time} 毫秒`)
+            resolve(`睡${time}毫秒`)
+        },time)
+    })
+}
 //创建目录
 async function mkdir(dir)
 {
@@ -43,4 +53,5 @@ module.exports = {
     accessAsync,
     readFile,
     readFileSync,
+    sleep,
 }

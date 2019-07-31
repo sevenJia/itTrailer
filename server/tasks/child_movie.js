@@ -14,12 +14,12 @@ const {resolve} = require('path');
     child.on('exit',code => {
         if(invoked) return;
         invoked = true;
-        let err = code === 0 ? null : new Error('exit code:' + code);
+        code === 0 ? null : new Error('exit code:' + code);
     });
 
     child.on('message', data => {
         let result = data.result;
-        console.log(result)
+        //console.log(result)
         saveMovieFile(result)
     });
 })();

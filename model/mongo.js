@@ -9,7 +9,9 @@ class mongo
 		if (mongoose.connection.readyState === 0) 
 		{//防止多次重复链接  readyState == 0 时是未连接状态
 			//连接数据库
-			mongoose.connect(`mongodb://localhost/${dbs}`)
+			mongoose.connect(`mongodb://localhost/${dbs}`, { useNewUrlParser: true } ,function(err){
+				if(!err) console.log(dbs+' 数据库连接成功')
+			})
 			let db = mongoose.connection
 			//绑定错误事件
 			db.on('error',console.error.bind(console,'connection error:'))
@@ -45,10 +47,25 @@ class mongo
 	 * @param {Object|被存入字段} field 
 	 * @param {Function|返回错误、获取数据集} callback 
 	 */
-	save (field, callback)
+	wsave (field, callback)
 	{
 		this.getModel(field).save(callback)
 		return this
+	}
+	save(field)
+	{
+		if(!(field instanceof Object)){
+			console.log(`Error: ${field} type is not Object`)
+			return;
+		}
+		return new Promise((resolve, reject) => 
+		{
+			this.getModel(field).save((err,result) => 
+			{
+				if(err) return reject(err)
+				resolve(result)
+			})
+		})
 	}
 	 /**
 	 * 移除数据 
@@ -71,8 +88,10 @@ class mongo
 	 */
 	find(where,query='')
 	{
-		//this.getModel().find(where,query,callback)
-		//return this
+		if(!(where instanceof Object)){
+			console.log(`Error: ${where} type is not Object`)
+			return;
+		}
 		return new Promise((resolve, reject) => {
 			this.getModel().find(where, query,(err,result) => {
 				if(err) return reject(err)
@@ -94,6 +113,24 @@ class mongo
 	{
 		this.getModel().update(where, { $set: field},callback)
 		return this
+	}
+	/**
+	 * 获取数据条目数
+	 */
+	count(field)
+	{
+		if(!(field instanceof Object)){
+			console.log(`Error: ${field} type is not Object`)
+			return;
+		}
+		return new Promise((resolve, reject) => 
+		{
+			this.getModel().countDocuments(field, (err,count) => 
+			{
+				if(err) return reject(err)
+				resolve(count)
+			})
+		})
 	}
 
 }
