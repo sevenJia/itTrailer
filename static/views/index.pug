@@ -6,7 +6,6 @@ block content
         .content
             .row
                 - for (var x = 0; x < data.length; x++)
-                    console.log(1)
                     .col-md-3
                         .card
                             div.card_img_box
@@ -14,8 +13,15 @@ block content
                                 data-src = `${data[x]['image_save_path']}`,
                                 data-video='https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm ')
                             div.card-body
-                                h4.card-title #{data[x]['title']}
+                                h4.card-title(data-trailer = `${JSON.stringify(data[x]['trailers'])}`) #{data[x]['title']}
                                 p.card-desc #{data[x]['summary']}
                             div.card-footer
-                                small.text-muted 更新于 #{data[x]['pubdate']} #{data[x]['id']}
+                                small.text-muted 更新于 #{data[x]['pubdate']} #{data[x]['_id']}
                         div.bottom_margin
+    #fixed_background
+    #details
+        .content_box
+            #video_part
+                p#video_title #{data[0]['title']}
+                video#video_src(src=`https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm`,
+                        controls)

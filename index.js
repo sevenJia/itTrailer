@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const views = require('koa-views')
 const Router = require('koa-router')
-const Static = require('koa-static')
+const Static = require('koa-static')        
 const path = require('path');
 const apiHome = require('./controller/index.js')
 
@@ -20,7 +20,7 @@ app.use(views(__dirname + '/static/views', {
 //路由
 router.get('/',async (ctx,next)=>{
     try{
-        const  data = await home.getHome()
+        const data = await home.getHome()
         await ctx.render('index.pug', {data})
     }catch(e){
         console.log(e)
