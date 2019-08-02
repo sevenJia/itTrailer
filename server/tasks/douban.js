@@ -50,7 +50,7 @@ let saveMovieFile = async (movies) => {
 			}
 			image_url = movieDatas.images.large.replace('s_ratio','l_ratio')
 			image_url = image_url != undefined ? image_url : false
-			
+
 			if(movieDatas['trailers'].length > 0)
 			{
 				video_url = movieDatas['trailers'][0]['resource_url']
@@ -75,7 +75,6 @@ let saveMovieFile = async (movies) => {
 					//创建文件夹 视频
 					await mkdir(path.resolve(__dirname, '../../static/movie'))
 					movieDatas['video_save_path'] = `/movie${video_save_path}`
-					console.log(movieDatas['video_save_path'])
 					video_save_path = path.resolve(__dirname, '../../static/movie' + video_save_path)
 					await rp({
 						'method':'get',

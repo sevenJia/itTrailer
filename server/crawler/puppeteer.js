@@ -2,8 +2,7 @@ const puppeteer = require('puppeteer');
 const {sleep} = require('../commonfun.js')
 const {PAGE_NUM,WAIT_TIME,PUPPETEER_URL} = require('../../config/config.js')
 
-
-(async () => {
+;(async () => {
     try{
         console.log('爬取数据开始 ----------- start !');
         //调用浏览器
