@@ -14,9 +14,10 @@ block content
                                 data-video='https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm ')
                             div.card-body
                                 h4.card-title(data-trailer = `${JSON.stringify(data[x]['trailers'])}`) #{data[x]['title']}
-                                p.card-desc #{data[x]['summary']}
+                                p.card-desc(data-vidio = `${data[x]['video_save_path']}`) #{data[x]['summary']}
+                                div.pop_up_window  #{data[x]['summary']}
                             div.card-footer
-                                small.text-muted 更新于 #{data[x]['pubdate']} #{data[x]['_id']}
+                                small.text-muted 更新于 #{data[x]['pubdate']}
                         div.bottom_margin
     #fixed_background
     #details
@@ -24,4 +25,5 @@ block content
             #video_part
                 p#video_title #{data[0]['title']}
                 video#video_src(src=`https://www.iyou.ink/iyou/public/static/index/images/nav-pc.webm`,
-                        controls)
+                        controls,
+                        autoplay)

@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const {sleep} = require('../commonfun.js')
-const {PAGE_NUM,WAIT_TIME} = require('../../config/config.js')
-const url = 'https://movie.douban.com/tag/#/';
+const {PAGE_NUM,WAIT_TIME,PUPPETEER_URL} = require('../../config/config.js')
+
 
 (async () => {
     try{
@@ -14,7 +14,7 @@ const url = 'https://movie.douban.com/tag/#/';
         //创建新页面
         const page = await browser.newPage();
         //进入网址
-        await page.goto(url, {
+        await page.goto(PUPPETEER_URL, {
             waitUntil: 'networkidle2'
         });
         //设置页面高度 宽度

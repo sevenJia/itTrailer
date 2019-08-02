@@ -4,13 +4,35 @@
 }
 .card_img_box > img.card-img-top{
     height:100%;
+    cursor: pointer;
 }
-.card-desc{
+.card-title{
+    cursor: pointer;
+}
+.card-desc {
     font-size: 13px;
     height: 36px;
     overflow: hidden;
-    margin-bottom: 0 !important;
-    text-overflow: ellipsis;
+}
+.pop_up_window {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 105%;
+    font-size: 13px;
+    padding: 20px 15px;
+    z-index: 1;
+    width: 120%;
+    background: #fff;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, .2), -1px -1px 8px rgba(0, 0, 0, .2);
+}
+.pop_up_window:nth-child(4n){
+    left: -105%;
+    background: red;
+}
+.pop_up_window:first-child{
+    left: -105%;
+    background: red;
 }
 div.bottom_margin {
     margin-bottom: 15px;
@@ -39,12 +61,14 @@ div#details::after{
 div#details .content_box {
     display: inline-block;
     width: 50%;
-    height: 60%;
+    min-height: 60%;
+    max-height: 85%;
     border:1px solid #ddd;
     border-radius: 5px; 
     vertical-align: middle;
     background-color: #fff;
     overflow: auto;
+    padding-bottom: 50px;
 }
 #video_part #video_title {
     margin-top: 40px;

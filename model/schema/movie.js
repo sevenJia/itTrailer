@@ -10,6 +10,7 @@ const movie = new Schema({
     'images':Schema.Types.Mixed,
     'trailers': [Schema.Types.Mixed],
     'image_save_path': String,
+    'video_save_path': String,
     'original_title': String,
     'blooper_urls': Array,
     'alt': String,
