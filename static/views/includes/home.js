@@ -89,7 +89,7 @@ function deal_fixed(dis)
         let video_src = document.getElementById('video_src');
         //终止视屏播放
         video_src.pause();
-        video_src.abort();
+        //video_src.abort();
     }
 }
 
