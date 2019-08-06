@@ -29,8 +29,6 @@ window.addEventListener('load',function()
     /**** 弹出窗口逻辑 */
     // click 事件委托
     let body = document.body;
-    let details = document.getElementById('details');
-    let fixed_background = document.getElementById('fixed_background');
     
     body.addEventListener('click',(e) =>
     {
@@ -82,6 +80,8 @@ window.addEventListener('load',function()
 //弹出层处理
 function deal_fixed(dis)
 {
+    let details = document.getElementById('details');
+    let fixed_background = document.getElementById('fixed_background');
     //样式处理
     details.style.display = dis;
     fixed_background.style.display = dis;
