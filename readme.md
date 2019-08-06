@@ -27,4 +27,4 @@ commonfun 为封装的一些异步函数
 ## Config
 调整配置文件内常量数值，可控制豆瓣资源的爬取页数
 
-![效果图](https://www.iyou.ink/itrailer.png,'效果图')
+![效果图](https://www.iyou.ink/itrailer.png)
