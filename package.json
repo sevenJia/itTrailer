@@ -25,7 +25,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
-    "mongoose": "^5.6.4",
+    "mongoose": "^5.7.5",
     "pug": "^2.0.4",
     "puppeteer": "^1.18.0",
     "request": "^2.88.0",
